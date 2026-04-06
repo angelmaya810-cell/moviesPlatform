@@ -5,7 +5,7 @@ Backend desarrollado en Java usando Gradle.
 ## 🚀 Funcionalidades
 - Búsqueda de películas
 - Consulta de información de películas
-- Integración con API externa (si aplica)
+- Integración con API externa
 
 ## 🛠️ Tecnologías
 - Java
