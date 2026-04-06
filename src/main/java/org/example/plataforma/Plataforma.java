@@ -3,6 +3,7 @@ package org.example.plataforma;
 import org.example.contenido.Pelicula;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Plataforma {
@@ -27,12 +28,10 @@ public class Plataforma {
         return contenido;
     }
 
-    public void mostrarTitulos(){
-        /*for (int i = 0; i < contenido.size(); i++) {
-            System.out.println("El contenido es: "+ contenido.get(i).getTitulo());
-        }*/
-
-        contenido.forEach(contenido -> System.out.println("El contenido es: "+ contenido.getTitulo()));
+    public List<String> mostrarTitulos(){
+        return contenido.stream()
+                .map(Pelicula::getTitulo)
+                .toList();
     }
 
     public void eliminar(Pelicula peliculaEliminar){
@@ -51,6 +50,19 @@ public class Plataforma {
     public List<Pelicula> buscarPorGenero(String genero){
         return contenido.stream()
                 .filter(contenido -> contenido.getGenero().equalsIgnoreCase(genero))
+                .toList();
+    }
+
+    public int getDuracionTotal(){
+        return contenido.stream()
+                .mapToInt(Pelicula::getDuracion)
+                .sum();
+    }
+
+    public List<Pelicula> getPopulares(int cantidad){
+        return contenido.stream()
+                .sorted(Comparator.comparingDouble(Pelicula::getCalificacion).reversed())
+                .limit(cantidad)
                 .toList();
     }
 }

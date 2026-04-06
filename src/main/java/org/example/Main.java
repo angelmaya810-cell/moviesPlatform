@@ -13,7 +13,8 @@ public class Main {
     public static final int BUSCARPORTITULO=3;
     public static final int ELIMINAR=4;
     public static final int BUSCARPORGENERO=5;
-    public static final int SALIR=6;
+    public static final int BUSCARPOPULARES=6;
+    public static final int SALIR=7;
     public static int opcionElegida;
 
     public static void main(String[] args) {
@@ -24,6 +25,8 @@ public class Main {
 
         cargarPeliculas(plataforma);
 
+        System.out.println("Mas de " + plataforma.getDuracionTotal() + " minutos de contenido \n");
+
         while(true) {
             System.out.println("""
                     Que opción quieres elegir:
@@ -33,7 +36,8 @@ public class Main {
                     3. Buscar por titulo
                     4. Eliminar
                     5. Buscar por Genero
-                    6. Salir
+                    6. Ver populares
+                    7. Salir
                     """);
 
 
@@ -49,7 +53,10 @@ public class Main {
 
                     plataforma.agregar(new Pelicula(nombre, duracion, genero, descripcion, calificacion));
                 }
-                case MOSTRARTODO -> plataforma.mostrarTitulos();
+                case MOSTRARTODO -> {
+                    List<String> titulos=plataforma.mostrarTitulos();
+                    titulos.forEach(System.out::println);
+                }
                 case BUSCARPORTITULO -> {
                     String nombreBuscado = ScannerUtils.capturarTexto("Nombre del contenido a buscar");
                     Pelicula pelicula = plataforma.buscarPorTitulo(nombreBuscado);
@@ -76,6 +83,12 @@ public class Main {
                     List<Pelicula> peliculaPorGenero = plataforma.buscarPorGenero(nombreGeneroBuscado);
                     System.out.println(peliculaPorGenero.size() + " encontrados para el genero "+ nombreGeneroBuscado);
                     peliculaPorGenero.forEach(pelicula -> System.out.println(pelicula.obtenerFichaTecnica()+ "\n"));
+                }
+                case BUSCARPOPULARES -> {
+                    int cantidad = ScannerUtils.capturarNumero("Introduce la cantidad deseada: ");
+
+                    List<Pelicula> peliculasPopulares = plataforma.getPopulares(cantidad);
+                    peliculasPopulares.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica()+ "\n"));
                 }
                 case SALIR -> System.exit(0);
 
