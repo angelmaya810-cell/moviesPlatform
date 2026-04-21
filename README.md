@@ -1,17 +1,13 @@
 # Movies Platform
 
-Backend desarrollado en Java usando Gradle.
+Backend Java using Gradle
 
-## 🚀 Funcionalidades
-- Búsqueda de películas
-- Consulta de información de películas
-- Integración con API externa (si aplica)
+## 🚀 Functionalities
+- Search of movies
+- Movies information
+- Integration with API
 
 ## 🛠️ Tecnologías
 - Java
 - Gradle
 - REST APIs
-
-## ▶️ Ejecución
-```bash
-./gradlew run
